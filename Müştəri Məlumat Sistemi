@@ -1,0 +1,223 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace CustomerManagementSystem
+{
+    // Customer Class
+    class Customer
+    {
+        // Properties (Get & Set)
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string Address { get; set; }
+        public DateTime RegisterDate { get; set; }
+
+        // Constructor
+        public Customer(string name, string surname, string phoneNumber,
+                        string email, string address, DateTime registerDate)
+        {
+            Name = name;
+            Surname = surname;
+            PhoneNumber = phoneNumber;
+            Email = email;
+            Address = address;
+            RegisterDate = registerDate;
+        }
+
+        // Method to show customer data
+        public void GetCustomerData()
+        {
+            Console.WriteLine("\n------ Müştəri Məlumatı ------");
+            Console.WriteLine($"Ad: {Name}");
+            Console.WriteLine($"Soyad: {Surname}");
+            Console.WriteLine($"Telefon: {PhoneNumber}");
+            Console.WriteLine($"Email: {Email}");
+            Console.WriteLine($"Ünvan: {Address}");
+            Console.WriteLine($"Qeydiyyat Tarixi: {RegisterDate}");
+            Console.WriteLine("------------------------------");
+        }
+    }
+
+    // Database Class
+    class Database
+    {
+        // Customer List
+        private List<Customer> customers;
+
+        // Constructor
+        public Database()
+        {
+            customers = new List<Customer>();
+        }
+
+        // Add Customer
+        public void AddCustomer(Customer customer)
+        {
+            customers.Add(customer);
+            Console.WriteLine("Müştəri uğurla əlavə edildi!");
+        }
+
+        // Remove Customer
+        public void RemoveCustomer(string phoneNumber)
+        {
+            Customer customer = customers.Find(c => c.PhoneNumber == phoneNumber);
+
+            if (customer != null)
+            {
+                customers.Remove(customer);
+                Console.WriteLine("Müştəri silindi!");
+            }
+            else
+            {
+                Console.WriteLine("Müştəri tapılmadı!");
+            }
+        }
+
+        // Update Customer
+        public void UpdateCustomer(string phoneNumber)
+        {
+            Customer customer = customers.Find(c => c.PhoneNumber == phoneNumber);
+
+            if (customer != null)
+            {
+                Console.Write("Yeni ad daxil et: ");
+                customer.Name = Console.ReadLine();
+
+                Console.Write("Yeni soyad daxil et: ");
+                customer.Surname = Console.ReadLine();
+
+                Console.Write("Yeni email daxil et: ");
+                customer.Email = Console.ReadLine();
+
+                Console.Write("Yeni ünvan daxil et: ");
+                customer.Address = Console.ReadLine();
+
+                Console.WriteLine("Müştəri məlumatı yeniləndi!");
+            }
+            else
+            {
+                Console.WriteLine("Müştəri tapılmadı!");
+            }
+        }
+
+        // Search Customer
+        public void SearchCustomer(string phoneNumber)
+        {
+            Customer customer = customers.Find(c => c.PhoneNumber == phoneNumber);
+
+            if (customer != null)
+            {
+                customer.GetCustomerData();
+            }
+            else
+            {
+                Console.WriteLine("Müştəri tapılmadı!");
+            }
+        }
+
+        // Show All Customers
+        public void ShowAllCustomers()
+        {
+            if (customers.Count == 0)
+            {
+                Console.WriteLine("Siyahıda müştəri yoxdur.");
+                return;
+            }
+
+            foreach (Customer customer in customers)
+            {
+                customer.GetCustomerData();
+            }
+        }
+    }
+
+    // Main Program
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Database db = new Database();
+
+            while (true)
+            {
+                Console.WriteLine("\n===== MÜŞTƏRİ MƏLUMAT SİSTEMİ =====");
+                Console.WriteLine("1. Müştəri əlavə et");
+                Console.WriteLine("2. Müştəri sil");
+                Console.WriteLine("3. Müştəri yenilə");
+                Console.WriteLine("4. Müştəri axtar");
+                Console.WriteLine("5. Bütün müştəriləri göstər");
+                Console.WriteLine("0. Çıxış");
+                Console.Write("Seçim edin: ");
+
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        Console.Write("Ad daxil et: ");
+                        string name = Console.ReadLine();
+
+                        Console.Write("Soyad daxil et: ");
+                        string surname = Console.ReadLine();
+
+                        Console.Write("Telefon nömrəsi daxil et: ");
+                        string phone = Console.ReadLine();
+
+                        Console.Write("Email daxil et: ");
+                        string email = Console.ReadLine();
+
+                        Console.Write("Ünvan daxil et: ");
+                        string address = Console.ReadLine();
+
+                        Customer newCustomer = new Customer(
+                            name,
+                            surname,
+                            phone,
+                            email,
+                            address,
+                            DateTime.Now
+                        );
+
+                        db.AddCustomer(newCustomer);
+                        break;
+
+                    case "2":
+                        Console.Write("Silinəcək müştərinin telefon nömrəsini daxil et: ");
+                        string removePhone = Console.ReadLine();
+
+                        db.RemoveCustomer(removePhone);
+                        break;
+
+                    case "3":
+                        Console.Write("Yenilənəcək müştərinin telefon nömrəsini daxil et: ");
+                        string updatePhone = Console.ReadLine();
+
+                        db.UpdateCustomer(updatePhone);
+                        break;
+
+                    case "4":
+                        Console.Write("Axtarılacaq müştərinin telefon nömrəsini daxil et: ");
+                        string searchPhone = Console.ReadLine();
+
+                        db.SearchCustomer(searchPhone);
+                        break;
+
+                    case "5":
+                        db.ShowAllCustomers();
+                        break;
+
+                    case "0":
+                        Console.WriteLine("Proqram bağlandı.");
+                        return;
+
+                    default:
+                        Console.WriteLine("Yanlış seçim!");
+                        break;
+                }
+            }
+        }
+    }
+}
