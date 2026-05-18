@@ -26,12 +26,12 @@ namespace CustomerManagementSystem
         public void GetCustomerData()
         {
             Console.WriteLine("\n----- Customer Information -----");
-            Console.WriteLine($"Name: {Name}");
-            Console.WriteLine($"Surname: {Surname}");
-            Console.WriteLine($"Phone Number: {PhoneNumber}");
-            Console.WriteLine($"Email: {Email}");
-            Console.WriteLine($"Address: {Address}");
-            Console.WriteLine($"Register Date: {RegisterDate}");
+            Console.WriteLine("Name: " + Name);
+            Console.WriteLine("Surname: " + Surname);
+            Console.WriteLine("Phone Number: " + PhoneNumber);
+            Console.WriteLine("Email: " + Email);
+            Console.WriteLine("Address: " + Address);
+            Console.WriteLine("Register Date: " + RegisterDate);
             Console.WriteLine("--------------------------------");
         }
     }
