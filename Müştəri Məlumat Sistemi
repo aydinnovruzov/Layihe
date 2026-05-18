@@ -4,7 +4,6 @@ using System.Linq;
 
 namespace CustomerManagementSystem
 {
-    // Customer Class
     class Customer
     {
         // Properties (Get & Set)
@@ -15,7 +14,6 @@ namespace CustomerManagementSystem
         public string Address { get; set; }
         public DateTime RegisterDate { get; set; }
 
-        // Constructor
         public Customer(string name, string surname, string phoneNumber,
                         string email, string address, DateTime registerDate)
         {
@@ -27,7 +25,6 @@ namespace CustomerManagementSystem
             RegisterDate = registerDate;
         }
 
-        // Method to show customer data
         public void GetCustomerData()
         {
             Console.WriteLine("\n------ Müştəri Məlumatı ------");
@@ -41,26 +38,21 @@ namespace CustomerManagementSystem
         }
     }
 
-    // Database Class
     class Database
     {
-        // Customer List
         private List<Customer> customers;
 
-        // Constructor
         public Database()
         {
             customers = new List<Customer>();
         }
 
-        // Add Customer
         public void AddCustomer(Customer customer)
         {
             customers.Add(customer);
             Console.WriteLine("Müştəri uğurla əlavə edildi!");
         }
 
-        // Remove Customer
         public void RemoveCustomer(string phoneNumber)
         {
             Customer customer = customers.Find(c => c.PhoneNumber == phoneNumber);
@@ -72,11 +64,8 @@ namespace CustomerManagementSystem
             }
             else
             {
-                Console.WriteLine("Müştəri tapılmadı!");
-            }
-        }
+                Console.WriteLine()
 
-        // Update Customer
         public void UpdateCustomer(string phoneNumber)
         {
             Customer customer = customers.Find(c => c.PhoneNumber == phoneNumber);
@@ -103,7 +92,6 @@ namespace CustomerManagementSystem
             }
         }
 
-        // Search Customer
         public void SearchCustomer(string phoneNumber)
         {
             Customer customer = customers.Find(c => c.PhoneNumber == phoneNumber);
@@ -118,7 +106,6 @@ namespace CustomerManagementSystem
             }
         }
 
-        // Show All Customers
         public void ShowAllCustomers()
         {
             if (customers.Count == 0)
@@ -134,7 +121,6 @@ namespace CustomerManagementSystem
         }
     }
 
-    // Main Program
     class Program
     {
         static void Main(string[] args)
