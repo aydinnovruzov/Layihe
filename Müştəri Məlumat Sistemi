@@ -64,8 +64,9 @@ namespace CustomerManagementSystem
             }
             else
             {
-                Console.WriteLine()
-
+                Console.WriteLine("Müştəri tapılmadı!")
+						 }
+			  }
         public void UpdateCustomer(string phoneNumber)
         {
             Customer customer = customers.Find(c => c.PhoneNumber == phoneNumber);
