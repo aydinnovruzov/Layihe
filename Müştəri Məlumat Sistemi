@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CustomerManagementSystem
 {
@@ -26,14 +25,14 @@ namespace CustomerManagementSystem
 
         public void GetCustomerData()
         {
-            Console.WriteLine("\n------ Müştəri Məlumatı ------");
-            Console.WriteLine($"Ad: {Name}");
-            Console.WriteLine($"Soyad: {Surname}");
-            Console.WriteLine($"Telefon: {PhoneNumber}");
+            Console.WriteLine("\n----- Customer Information -----");
+            Console.WriteLine($"Name: {Name}");
+            Console.WriteLine($"Surname: {Surname}");
+            Console.WriteLine($"Phone Number: {PhoneNumber}");
             Console.WriteLine($"Email: {Email}");
-            Console.WriteLine($"Ünvan: {Address}");
-            Console.WriteLine($"Qeydiyyat Tarixi: {RegisterDate}");
-            Console.WriteLine("------------------------------");
+            Console.WriteLine($"Address: {Address}");
+            Console.WriteLine($"Register Date: {RegisterDate}");
+            Console.WriteLine("--------------------------------");
         }
     }
 
@@ -49,7 +48,7 @@ namespace CustomerManagementSystem
         public void AddCustomer(Customer customer)
         {
             customers.Add(customer);
-            Console.WriteLine("Müştəri uğurla əlavə edildi!");
+            Console.WriteLine("Customer added successfully!");
         }
 
         public void RemoveCustomer(string phoneNumber)
@@ -59,36 +58,37 @@ namespace CustomerManagementSystem
             if (customer != null)
             {
                 customers.Remove(customer);
-                Console.WriteLine("Müştəri silindi!");
+                Console.WriteLine("Customer removed successfully!");
             }
             else
             {
-                Console.WriteLine("Müştəri tapılmadı!")
-						 }
-			  }
+                Console.WriteLine("Customer not found!");
+            }
+        }
+
         public void UpdateCustomer(string phoneNumber)
         {
             Customer customer = customers.Find(c => c.PhoneNumber == phoneNumber);
 
             if (customer != null)
             {
-                Console.Write("Yeni ad daxil et: ");
+                Console.Write("Enter new name: ");
                 customer.Name = Console.ReadLine();
 
-                Console.Write("Yeni soyad daxil et: ");
+                Console.Write("Enter new surname: ");
                 customer.Surname = Console.ReadLine();
 
-                Console.Write("Yeni email daxil et: ");
+                Console.Write("Enter new email: ");
                 customer.Email = Console.ReadLine();
 
-                Console.Write("Yeni ünvan daxil et: ");
+                Console.Write("Enter new address: ");
                 customer.Address = Console.ReadLine();
 
-                Console.WriteLine("Müştəri məlumatı yeniləndi!");
+                Console.WriteLine("Customer updated successfully!");
             }
             else
             {
-                Console.WriteLine("Müştəri tapılmadı!");
+                Console.WriteLine("Customer not found!");
             }
         }
 
@@ -102,7 +102,7 @@ namespace CustomerManagementSystem
             }
             else
             {
-                Console.WriteLine("Müştəri tapılmadı!");
+                Console.WriteLine("Customer not found!");
             }
         }
 
@@ -110,7 +110,7 @@ namespace CustomerManagementSystem
         {
             if (customers.Count == 0)
             {
-                Console.WriteLine("Siyahıda müştəri yoxdur.");
+                Console.WriteLine("No customers in the list.");
                 return;
             }
 
@@ -129,33 +129,33 @@ namespace CustomerManagementSystem
 
             while (true)
             {
-                Console.WriteLine("\n===== MÜŞTƏRİ MƏLUMAT SİSTEMİ =====");
-                Console.WriteLine("1. Müştəri əlavə et");
-                Console.WriteLine("2. Müştəri sil");
-                Console.WriteLine("3. Müştəri yenilə");
-                Console.WriteLine("4. Müştəri axtar");
-                Console.WriteLine("5. Bütün müştəriləri göstər");
-                Console.WriteLine("0. Çıxış");
-                Console.Write("Seçim edin: ");
+                Console.WriteLine("\n===== CUSTOMER MANAGEMENT SYSTEM =====");
+                Console.WriteLine("1. Add Customer");
+                Console.WriteLine("2. Remove Customer");
+                Console.WriteLine("3. Update Customer");
+                Console.WriteLine("4. Search Customer");
+                Console.WriteLine("5. Show All Customers");
+                Console.WriteLine("0. Exit");
+                Console.Write("Choose option: ");
 
                 string choice = Console.ReadLine();
 
                 switch (choice)
                 {
                     case "1":
-                        Console.Write("Ad daxil et: ");
+                        Console.Write("Enter name: ");
                         string name = Console.ReadLine();
 
-                        Console.Write("Soyad daxil et: ");
+                        Console.Write("Enter surname: ");
                         string surname = Console.ReadLine();
 
-                        Console.Write("Telefon nömrəsi daxil et: ");
+                        Console.Write("Enter phone number: ");
                         string phone = Console.ReadLine();
 
-                        Console.Write("Email daxil et: ");
+                        Console.Write("Enter email: ");
                         string email = Console.ReadLine();
 
-                        Console.Write("Ünvan daxil et: ");
+                        Console.Write("Enter address: ");
                         string address = Console.ReadLine();
 
                         Customer newCustomer = new Customer(
@@ -171,21 +171,21 @@ namespace CustomerManagementSystem
                         break;
 
                     case "2":
-                        Console.Write("Silinəcək müştərinin telefon nömrəsini daxil et: ");
+                        Console.Write("Enter phone number: ");
                         string removePhone = Console.ReadLine();
 
                         db.RemoveCustomer(removePhone);
                         break;
 
                     case "3":
-                        Console.Write("Yenilənəcək müştərinin telefon nömrəsini daxil et: ");
+                        Console.Write("Enter phone number: ");
                         string updatePhone = Console.ReadLine();
 
                         db.UpdateCustomer(updatePhone);
                         break;
 
                     case "4":
-                        Console.Write("Axtarılacaq müştərinin telefon nömrəsini daxil et: ");
+                        Console.Write("Enter phone number: ");
                         string searchPhone = Console.ReadLine();
 
                         db.SearchCustomer(searchPhone);
@@ -196,11 +196,11 @@ namespace CustomerManagementSystem
                         break;
 
                     case "0":
-                        Console.WriteLine("Proqram bağlandı.");
+                        Console.WriteLine("Program closed.");
                         return;
 
                     default:
-                        Console.WriteLine("Yanlış seçim!");
+                        Console.WriteLine("Invalid option!");
                         break;
                 }
             }
